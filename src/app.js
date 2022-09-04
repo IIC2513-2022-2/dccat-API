@@ -13,9 +13,9 @@ app.use(KoaLogger());
 // Parse Request Body
 app.use(koaBody());
 
-app.use((ctx, next) => {
-  ctx.body = "Hello 2048 DCC!";
-})
+// app.use((ctx, next) => {
+//   ctx.body = "Hello 2048 DCC!";
+// })
 
 app.use(router.routes());
 

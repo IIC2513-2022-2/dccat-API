@@ -2,10 +2,15 @@ import Koa from "koa";
 import koaBody from "koa-body";
 import KoaLogger from "koa-logger";
 import router from "./routes.js";
+import cors from "@koa/cors";
 
 const PORT = 3000;
 
 const app = new Koa();
+
+
+app.use(cors());
+
 
 // Logs requests from the server
 app.use(KoaLogger());

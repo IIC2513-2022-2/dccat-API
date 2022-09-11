@@ -1,10 +1,10 @@
-import Router from "koa-router"
-import movies from "./routes/movies.js";
-import firstGet from "./routes/firstGet.js";
+const Router = require('koa-router');
+const movies = require('./routes/movies');
+const firstGet = require('./routes/firstGet');
 
 const router = new Router();
 
 router.use('/movies', movies.routes());
 router.use('/firstGet', firstGet.routes());
 
-export default router;
+module.exports = router;

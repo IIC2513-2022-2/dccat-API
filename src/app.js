@@ -1,8 +1,8 @@
-import Koa from "koa";
-import koaBody from "koa-body";
-import KoaLogger from "koa-logger";
-import router from "./routes.js";
-import cors from "@koa/cors";
+const Koa = require('koa');
+const koaBody = require('koa-body');
+const KoaLogger = require('koa-logger');
+const router = require('./routes');
+const cors = require('@koa/cors');
 
 const PORT = 3000;
 

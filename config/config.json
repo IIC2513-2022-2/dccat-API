@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "domingo",
+    "password": 1029,
+    "database": "dccat_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "domingo",
+    "password": 1029,
+    "database": "dccat_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "domingo",
+    "password": 1029,
+    "database": "dccat_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

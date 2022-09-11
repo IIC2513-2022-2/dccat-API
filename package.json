@@ -8,15 +8,18 @@
   "author": "IIC2513-2022-2",
   "license": "MIT",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "yarn nodemon src/app.js"
+    "start": "node src/index.js",
+    "dev": "yarn nodemon src/index.js"
   },
   "dependencies": {
     "@koa/cors": "^3.4.1",
     "koa": "^2.13.4",
     "koa-body": "^5.0.0",
     "koa-logger": "^3.2.1",
-    "koa-router": "^12.0.0"
+    "koa-router": "^12.0.0",
+    "pg": "^8.8.0",
+    "sequelize": "^6.21.6",
+    "sequelize-cli": "^6.4.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"

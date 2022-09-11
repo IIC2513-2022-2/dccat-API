@@ -3,10 +3,11 @@ const koaBody = require('koa-body');
 const KoaLogger = require('koa-logger');
 const router = require('./routes');
 const cors = require('@koa/cors');
-
-const PORT = 3000;
-
+const orm = require('../models');
 const app = new Koa();
+
+// Atach Sequelize ORM to the context of the App
+app.context.orm = orm;
 
 
 app.use(cors());
@@ -18,12 +19,6 @@ app.use(KoaLogger());
 // Parse Request Body
 app.use(koaBody());
 
-// app.use((ctx, next) => {
-//   ctx.body = "Hello 2048 DCC!";
-// })
-
 app.use(router.routes());
 
-app.listen(PORT, () => {
-  console.log(`Starting app in port ${PORT}`);
-});
+module.exports = app;

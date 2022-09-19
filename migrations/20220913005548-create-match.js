@@ -1,17 +1,14 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Plays', {
+    await queryInterface.createTable('Matches', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      x: {
-        type: Sequelize.INTEGER
-      },
-      y: {
+      turno: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -22,13 +19,21 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      player: {
+      player_1: {
         type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: { model: 'Players' , key: 'id' }}
+        references: { model: 'Players' , key: 'id' }
+      },
+      player_2: {
+        type: Sequelize.INTEGER,
+        references: { model: 'Players' , key: 'id' }
+      },
+      current: {
+        type: Sequelize.INTEGER,
+        references: { model: 'Players' , key: 'id' }
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Plays');
+    await queryInterface.dropTable('Matches');
   }
 };

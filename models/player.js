@@ -11,24 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.Play, {
-        foreignKey: 'player',
-        onDelete: 'CASCADE'
+        foreignKey: 'player'
+      });
+      this.belongsToMany(models.Match,{
+        through: 'MatchPlayers',
+        as:'Matches'
+      });
+      this.hasMany(models.Match, {
+        foreignKey: 'player_1'
       });
       this.hasMany(models.Match, {
         foreignKey: 'player_2',
-        onDelete: 'CASCADE'
-      });
-      this.hasMany(models.Match, {
-        foreignKey: 'player_2',
-        onDelete: 'CASCADE'
       });
       this.hasOne(models.Match, {
-        foreignKey: 'current_player_1',
-        onDelete: 'CASCADE'
-      });
-      this.hasOne(models.Match, {
-        foreignKey: 'current_player_2',
-        onDelete: 'CASCADE'
+        as: 'current_player', 
+        foreignKey: 'current',
       });
     }
   }

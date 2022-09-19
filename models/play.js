@@ -11,8 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Player, {
-        foreignKey: 'player',
-        onDelete: 'CASCADE'
+        foreignKey: 'player'
+      });
+      this.belongsTo(models.Match, {
+        foreignKey: 'match_id'
       });
     }
   }

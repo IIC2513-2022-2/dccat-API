@@ -10,25 +10,20 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsToMany(models.Player, {
-        foreignKey: 'player_1',
-        onDelete: 'CASCADE'
+      this.belongsTo(models.Player, {
+        as:'player1',
+        foreignKey: 'player_1'
       });
       this.belongsTo(models.Player, {
-        foreignKey: 'player_1',
-        onDelete: 'CASCADE'
+        as:'player2',
+        foreignKey: 'player_2'
       });
       this.belongsTo(models.Player, {
-        foreignKey: 'player_2',
-        onDelete: 'CASCADE'
+        as: 'current_player',
+        foreignKey: 'current'
       });
-      this.belongsTo(models.Player, {
-        foreignKey: 'current_player_1',
-        onDelete: 'CASCADE'
-      });
-      this.belongsTo(models.Player, {
-        foreignKey: 'current_player_2',
-        onDelete: 'CASCADE'
+      this.hasMany(models.Play, {
+        foreignKey: 'match_id'
       });
     }
   }

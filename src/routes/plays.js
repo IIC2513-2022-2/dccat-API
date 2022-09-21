@@ -1,14 +1,19 @@
 const Router = require('koa-router');
 
 const router = new Router();
-const {Play} = require('../../models');
 
 router.get('plays.show', '/', async (ctx) => {
-  await Play.findAll({}).then((plays) => {
-    console.log(plays);
-    ctx.body={plays};
-}).catch((err) => {
-    console.log(err);
-});
+  try {
+    const play = await ctx.orm.Play.findAll({
+      include: [
+        { model: ctx.orm.Match },
+        { model: ctx.orm.Player },
+      ],
+    });
+    ctx.body = play
+  } catch (error) {
+    console.log(error);
+    ctx.throw(404);
+  }
 });
 module.exports = router;

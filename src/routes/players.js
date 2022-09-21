@@ -4,11 +4,19 @@ const router = new Router();
 const {Player} = require('../../models');
 
 router.get('players.show', '/', async (ctx) => {
-  await Player.findAll({}).then((players) => {
-    console.log(players);
-    ctx.body=players;
-}).catch((err) => {
-    console.log(err);
-});
+  try {
+    const players = await ctx.orm.Player.findAll(
+      {
+        include: [
+          {model: ctx.orm.Play},
+          {model: ctx.orm.Match},
+        ]
+      }
+    );
+    ctx.body = players;
+  } catch (error) {
+    console.log(error);
+    ctx.throw(404);
+  }
 });
 module.exports = router;

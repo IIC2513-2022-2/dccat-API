@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'player_2'
       });
       this.belongsTo(models.Player, {
-        as: 'current_player',
+        as: 'currentPlayer',
         foreignKey: 'current'
       });
       this.hasMany(models.Play, {

@@ -1,7 +1,5 @@
 ## What 
 
-
-
 ## Why
 
 
@@ -9,7 +7,6 @@
 
 
 ## Testing 
-
 
 ## Screenshots 
 

@@ -10,7 +10,7 @@ router.get('plays.show', '/', async (ctx) => {
         { model: ctx.orm.Player },
       ],
     });
-    ctx.body = play
+    ctx.body = play;
   } catch (error) {
     console.log(error);
     ctx.throw(404);

@@ -1,8 +1,5 @@
-'use strict';
-
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Matches', [
+  up: (queryInterface) => queryInterface.bulkInsert('Matches', [
     {
       id: 0,
       turno: 0,
@@ -10,8 +7,8 @@ module.exports = {
       player_2: 1,
       current: 0,
       createdAt: new Date(),
-      updatedAt: new Date()
-    }, 
+      updatedAt: new Date(),
+    },
     {
       id: 1,
       turno: 1,
@@ -19,11 +16,8 @@ module.exports = {
       player_2: 2,
       current: 1,
       createdAt: new Date(),
-      updatedAt: new Date()
-    }, 
-  ]);
-  },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Matches', null, {});
-  }
+      updatedAt: new Date(),
+    },
+  ]),
+  down: (queryInterface) => queryInterface.bulkDelete('Matches', null, {}),
 };

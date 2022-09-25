@@ -16,4 +16,34 @@ router.get('plays.show', '/', async (ctx) => {
     ctx.throw(404);
   }
 });
+
+router.post('plays.create', '/', async (ctx) => {
+  const match = await ctx.orm.Match.findByPk(ctx.request.body.match_id, {
+    include: [
+      {
+        model: ctx.orm.Play,
+        required: false,
+      },
+    ],
+  });
+  // construimos un array que tenga las posiciones utilizadas en formato 'x,y'
+  const plays = match.Plays.map((play) => `${play.dataValues.x}, ${play.dataValues.y}`);
+  if (![match.player_1, match.player_2].includes(ctx.request.body.player)) {
+    ctx.throw('No tienes permiso para realizar esta jugada', 403);
+  }
+  if (match.turno !== (ctx.request.body.player)) {
+    ctx.throw('No es tu turno', 403);
+  }
+  if (!(ctx.request.body.x >= 0 && ctx.request.body.x <= 2)
+  || !(ctx.request.body.y >= 0 && ctx.request.body.y <= 2)) {
+    ctx.throw('La casilla ingresada no existe', 400);
+  }
+  if (plays.includes(`${ctx.request.body.x}, ${ctx.request.body.y}`)) {
+    ctx.throw('El casillero ya ha sido utilizado en otra jugada', 400);
+  }
+
+  const play = await ctx.orm.Play.create(ctx.request.body);
+  ctx.throw(play.dataValues, 201);
+});
+
 module.exports = router;

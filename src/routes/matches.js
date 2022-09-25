@@ -17,7 +17,7 @@ router.get('matches.show', '/:id', async (ctx) => {
     if (!match) {
       ctx.throw(404);
     }
-    const requestPlayer = await ctx.orm.Player.findByPk(ctx.request.query.id);
+    const requestPlayer = await ctx.orm.Player.findByPk(ctx.request.query.player);
     const player1 = await match.getPlayer1();
     const player2 = await match.getPlayer2();
     const plays = await match.getPlays();

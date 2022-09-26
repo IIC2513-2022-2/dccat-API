@@ -2,7 +2,7 @@ const Router = require('koa-router');
 
 const router = new Router();
 
-router.get('matches.show', '/:id', async (ctx) => {
+router.get('matches.show', '/:id/players/:playerId', async (ctx) => {
   try {
     const match = await ctx.orm.Match.findByPk(
       ctx.params.id,
@@ -17,7 +17,7 @@ router.get('matches.show', '/:id', async (ctx) => {
     if (!match) {
       ctx.throw(404);
     }
-    const requestPlayer = await ctx.orm.Player.findByPk(ctx.request.query.player);
+    const requestPlayer = await ctx.orm.Player.findByPk(ctx.params.playerId);
     const player1 = await match.getPlayer1();
     const player2 = await match.getPlayer2();
     const plays = await match.getPlays();

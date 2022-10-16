@@ -20,9 +20,6 @@ router.post("/login", async (ctx) => {
                 });
                 ctx.session.sessionid = new_session.id;
 
-                // Agregamos el id del usuario a la session cookie
-                ctx.session.userid = player.id;
-
                 // Creamos el jwt
                 payload = { matches: player.Matches };
                 var token = JWT.sign(payload, `${process.env.JWT_SECRET}`);
@@ -57,6 +54,18 @@ router.post('players.create', '/signup', async (ctx) => {
         ctx.throw(error);
     }
 });
+
+router.get('/logout', async (ctx) => {
+    try {
+        await ctx.orm.Session.destroy({
+            where: { id: `${ctx.session.sessionid}` }
+        });
+        ctx.session.sessionid = undefined;
+        ctx.status = 200;
+    } catch (error) {
+        ctx.throw(error);
+    }
+})
 
 module.exports = router;
 

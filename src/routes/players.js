@@ -59,4 +59,23 @@ router.get('players.show', '/:id', async (ctx) => {
     ctx.throw(404);
   }
 });
+
+// This endpoint is only to show how to call the ORM in this implementation, 
+// could be changed for a test.
+
+// GET players/:playerId/matchesCurrentPlayer
+router.get('players.matches', '/:id/matchesCurrentPlayer', async (ctx) => {
+  try {
+    const player = await ctx.orm.Player.findByPk(ctx.params.id, {
+      include: [
+        { model: ctx.orm.Match, as: 'matchesCurrentPlayer' },
+      ],
+    });
+
+    ctx.body = player.matchesCurrentPlayer;
+  } catch (error) {
+    console.log(error);
+    ctx.throw(404);
+  }
+});
 module.exports = router;

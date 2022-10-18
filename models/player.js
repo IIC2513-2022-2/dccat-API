@@ -13,18 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Play, {
         foreignKey: 'player',
       });
-      this.belongsToMany(models.Match, {
-        through: 'MatchPlayers',
-        as: 'Matches',
-      });
       this.hasMany(models.Match, {
         foreignKey: 'player_1',
+        as: 'matchesPlayer1',
       });
       this.hasMany(models.Match, {
         foreignKey: 'player_2',
+        as: 'matchesPlayer2',
       });
-      this.hasOne(models.Match, {
-        as: 'current_player',
+      this.hasMany(models.Match, {
+        as: 'matchesCurrentPlayer',
         foreignKey: 'current',
       });
     }

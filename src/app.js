@@ -5,9 +5,6 @@ const cors = require('@koa/cors');
 const router = require('./routes');
 const orm = require('../models');
 const session = require('koa-session');
-const jwt = require('koa-jwt');
-const protected_router = require('./routes/protected');
-
 const app = new Koa();
 
 // Atach Sequelize ORM to the context of the App
@@ -30,10 +27,6 @@ const CONFIG = {
 app.use(session(CONFIG, app));
 
 app.use(router.routes());
-
-app.use(jwt({ secret: process.env.JWT_SECRET, key: 'tokendata' }));
-
-app.use(protected_router.routes());
 
 module.exports = app;
 

@@ -7,10 +7,9 @@ router.delete('matches.delete', '/delete/:id_match', async (ctx) => {
     try {
         // Buscamos ctx.params.id_Match
         var found = false
+        console.log(ctx.state.tokendata.matches);
 
         ctx.state.tokendata.matches.forEach(match => {
-            console.log(match.id);
-            console.log(ctx.params.id_match);
             if (match.id == ctx.params.id_match) {
                 found = true;
             };

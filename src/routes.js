@@ -13,6 +13,4 @@ router.use('/matches', auth_middle, matches.routes());
 router.use('/players', auth_middle, players.routes());
 router.use('/plays', auth_middle, plays.routes());
 
-
-
 module.exports = router;

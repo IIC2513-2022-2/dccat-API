@@ -3,7 +3,7 @@ const Router = require('koa-router');
 
 const router = new Router();
 
-router.get('players.show', '/', async (ctx) => {
+router.get('player.show', '/profile', async (ctx) => {
   try {
     const session = await ctx.orm.Session.findByPk(ctx.session.sessionid);
     const playerid = session.userid;

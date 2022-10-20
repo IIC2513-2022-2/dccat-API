@@ -55,7 +55,7 @@ router.post('players.create', '/signup', async (ctx) => {
     }
 });
 
-router.get('/logout', async (ctx) => {
+router.post('/logout', async (ctx) => {
     try {
         await ctx.orm.Session.destroy({
             where: { id: `${ctx.session.sessionid}` }

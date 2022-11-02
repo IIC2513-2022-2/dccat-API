@@ -43,4 +43,36 @@ router.get('matches.show', '/:id/players/:playerId', async (ctx) => {
   }
 });
 
+router.get('matches.index', '/', async (ctx) => {
+  const match = await ctx.orm.Match.findAll({
+    include: [
+      { model: ctx.orm.Player, as: 'player1' },
+      { model: ctx.orm.Player, as: 'player2' },
+      { model: ctx.orm.Player, as: 'currentPlayer' },
+    ],
+  });
+  ctx.body = match;
+});
+
+// GET /matches/:matchId/player1
+router.get('matches.player1', '/:id/player1', async (ctx) => {
+  const match = await ctx.orm.Match.findByPk(ctx.params.id);
+  const player1 = await match.getPlayer1();
+  ctx.body = player1;
+});
+
+// GET /matches/:matchId/player2
+router.get('matches.player2', '/:id/player2', async (ctx) => {
+  const match = await ctx.orm.Match.findByPk(ctx.params.id);
+  const player2 = await match.getPlayer2();
+  ctx.body = player2;
+});
+
+// GET /matches/:matchId/currentPlayer
+router.get('matches.currentPlayer', '/:id/currentPlayer', async (ctx) => {
+  const match = await ctx.orm.Match.findByPk(ctx.params.id);
+  const player2 = await match.getCurrentPlayer();
+  ctx.body = player2;
+});
+
 module.exports = router;

@@ -27,6 +27,7 @@ module.exports = {
       },
       match_id: {
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: { model: 'Matches', key: 'id' },
       },
 

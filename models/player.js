@@ -25,6 +25,9 @@ module.exports = (sequelize, DataTypes) => {
         as: 'matchesCurrentPlayer',
         foreignKey: 'current',
       });
+      this.hasMany(models.Session, {
+        foreignKey: 'id',
+      });
     }
   }
   Player.init({

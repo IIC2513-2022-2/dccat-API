@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       this.hasMany(models.Play, {
         foreignKey: 'match_id',
+        onDelete: 'CASCADE'
       });
     }
   }

@@ -13,7 +13,8 @@ router.post("/login", async (ctx) => {
             ]
         });
         if (player) {
-            if (bcrypt.compare(ctx.request.body.password, player.hash_contrasena)) {
+            const compare = await bcrypt.compare(ctx.request.body.password, player.hash_contrasena);
+            if (compare) {
                 // Creamos la sesión en la base de datos y le agregamos el id a la cookie
                 const new_session = await ctx.orm.Session.create({
                     userid: player.id

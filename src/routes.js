@@ -16,8 +16,8 @@ router.use('/matches', auth_middle, matches.routes());
 router.use('/players', auth_middle, players.routes());
 router.use('/plays', auth_middle, plays.routes());
 
-app.use(jwt({ secret: process.env.JWT_SECRET, key: 'tokendata' }));
+router.use(jwt({ secret: process.env.JWT_SECRET, key: 'tokendata' }));
 
-app.use(protected.routes());
+router.use(protected.routes());
 
 module.exports = router;

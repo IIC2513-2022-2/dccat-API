@@ -9,7 +9,7 @@ router.post("/login", async (ctx) => {
         const player = await ctx.orm.Player.findOne({
             where: { email: ctx.request.body.email },
             include: [
-                { model: ctx.orm.Match, attributes: ['id'] }
+                { model: ctx.orm.Match, attributes: ['id'], as: 'matchesPlayer1' }
             ]
         });
         if (player) {
@@ -22,7 +22,7 @@ router.post("/login", async (ctx) => {
                 ctx.session.sessionid = new_session.id;
 
                 // Creamos el jwt
-                payload = { matches: player.Matches };
+                payload = { matches: player.matchesPlayer1 };
                 var token = JWT.sign(payload, `${process.env.JWT_SECRET}`);
 
                 // Lo enviamos

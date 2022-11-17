@@ -9,7 +9,11 @@
   "license": "MIT",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "yarn nodemon src/index.js"
+    "dev": "yarn nodemon src/index.js",
+    "test": "cross-env NODE_ENV=test jest --runInBand",
+    "pretest": "cross-env NODE_ENV=test yarn run migrate:reset",
+    "migrate:reset": "yarn sequelize-cli db:drop && yarn run setup_test_db",
+    "setup_test_db": "yarn sequelize-cli db:create && yarn sequelize-cli db:migrate && yarn sequelize-cli db:seed:all --seeders-path seeders/test_seeds"
   },
   "dependencies": {
     "@koa/cors": "^3.4.1",
@@ -26,9 +30,13 @@
     "sequelize-cli": "^6.4.1"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.2",
-    "nodemon": "^2.0.19"
+    "eslint-plugin-jest": "^27.1.5",
+    "jest": "^29.3.1",
+    "nodemon": "^2.0.19",
+    "supertest": "^6.3.1"
   }
 }
